@@ -6,6 +6,7 @@ import { nftaddress, nftmarketaddress } from '../config';
 import NFT from '../artifacts/contracts/DSCHOOL.sol/DSCHOOL.json';
 import Market from '../artifacts/contracts/DSCHOOLMarket.sol/DSCHOOLMarket.json';
 import Image from 'next/image'
+import xxx from '../config'
 
 export default function Home() {
   const [nfts, setNfts] = useState([]);
@@ -17,7 +18,7 @@ export default function Home() {
   }, []);
 
   async function loadNFTs(){
-    const provider = new ethers.providers.JsonRpcProvider("https://polygon-mumbai.g.alchemy.com/v2/o0H1ix6XqKYO3m5Re00g4ksrJVacsaWA");
+    const provider = new ethers.providers.JsonRpcProvider(xxx);
     const tokenContract = new ethers.Contract(nftaddress, NFT.abi, provider);
     const marketContract = new ethers.Contract(nftmarketaddress, Market.abi, provider);
 
@@ -66,7 +67,7 @@ export default function Home() {
   }
 
   if(loadingState === 'loaded' && !nfts.length) return (
-    <h1 className="px-20 py-10 text-3xl">No items in market place</h1>
+    <h1 className="px-20 py-10 text-3xl">No Course in market place</h1>
   )
 
   return (
@@ -95,10 +96,10 @@ export default function Home() {
               </div>
               <div className="p-4 bg-black">
                 <p className="text-2xl mb-4 font-bold text-white">
-                  {nft.price} ETH
+                  {nft.price} MATIC
                 </p>
                 <button className="w-full bg-pink-500 text-white font-bold py-2 px-12 rounded"
-                onClick={() => buyNFT(nft)}>Buy NFT</button>
+                onClick={() => buyNFT(nft)}>Buy Course</button>
             </div>
             </div>
           ))

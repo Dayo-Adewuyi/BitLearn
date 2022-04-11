@@ -129,17 +129,17 @@ contract DSCHOOLMarket is ReentrancyGuard {
         /// make the buyer the new owner
         idMarketItem[itemId].owner = payable(msg.sender);
         /// change status to item sold
-        idMarketItem[itemId].sold = true; 
+        idMarketItem[itemId].sold = true;
         ///increment the total number of Items sold by 1
-        _itemsSold.increment(); 
+        _itemsSold.increment();
         ///pay owner of contract the listing price
-        payable(owner).transfer(listingPrice); 
+        payable(owner).transfer(listingPrice);
     }
 
     /// @notice total number of items unsold on our platform
     function fetchMarketItems() public view returns (MarketItem[] memory) {
         /// total number of items ever created
-        uint itemCount = _itemIds.current(); 
+        uint itemCount = _itemIds.current();
         ///total number of items that are unsold = total items ever created - total items ever sold
         uint unsoldItemCount = _itemIds.current() - _itemsSold.current();
         uint currentIndex = 0;
@@ -160,7 +160,7 @@ contract DSCHOOLMarket is ReentrancyGuard {
             }
         }
         ///return array of all unsold items
-        return items; 
+        return items;
     }
 
     /// @notice fetch list of courses owned/bought by the user
@@ -201,7 +201,7 @@ contract DSCHOOLMarket is ReentrancyGuard {
         for (uint i = 0; i < totalItemCount; i++) {
             ///get only the items that this user has bought/is the owner
             if (idMarketItem[i + 1].tutor == msg.sender) {
-                itemCount += 1; 
+                itemCount += 1;
             }
         }
 
